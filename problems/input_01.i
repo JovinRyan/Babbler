@@ -24,6 +24,7 @@
 [Kernels]
   [Diffusion]
     type = DarcyPressure
+    permeability = 0.8415e-09 #m^2
     variable = pressure
   []
 []
