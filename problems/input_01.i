@@ -50,6 +50,22 @@
   []
 []
 
+[AuxVariables]
+  [velocity]
+    order = CONSTANT
+    family = MONOMIAL_VEC
+  []
+[]
+
+[AuxKernels]
+  [velocity]
+    type = DarcyVelocity
+    pressure = pressure
+    variable = velocity
+    execute_on = 'TIMESTEP_END'
+  []
+[]
+
 [Executioner]
   type = Steady
   solve_type = NEWTON
