@@ -4,9 +4,4 @@
     input = darcy_pressure_test.i
     exodiff = darcy_pressure_test_out.e
   []
-  [zero_viscosity_error]
-    type = RunException
-    input = zero_viscosity.i
-    expect_err = "Viscosity must be a non-zero real number."
-  []
 []

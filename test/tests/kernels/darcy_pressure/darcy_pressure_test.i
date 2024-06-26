@@ -1,42 +1,58 @@
 [Mesh]
-  type = GeneratedMesh
-  dim = 2
-  nx = 10
-  ny = 10
+  [gmg]
+    type = GeneratedMeshGenerator
+    dim = 2
+    nx = 100
+    ny = 10
+    xmax = 0.304
+    ymax = 0.0257
+  []
+  coord_type = RZ
+  rz_coord_axis = X
+[]
+
+[Problem]
+  type = FEProblem
 []
 
 [Variables]
   [pressure]
+    family = LAGRANGE
   []
 []
 
 [Kernels]
-  [diffusion]
+  [Diffusion]
     type = DarcyPressure
     variable = pressure
-    permeability = 0.8415e-09
+  []
+[]
+
+[Materials]
+  [filter]
+    type = PackedColumn
   []
 []
 
 [BCs]
-  [left]
+  [inlet]
     type = DirichletBC
     variable = pressure
-    value = 0
+    value = 4000 #Pa
     boundary = 'left'
   []
 
-  [right]
+  [outlet]
     type = DirichletBC
     variable = pressure
-    value = 1
+    value = 0 #Pa
     boundary = 'right'
   []
 []
 
 [Executioner]
   type = Steady
-  solve_type = PJFNK
+  solve_type = NEWTON
 
   petsc_options_iname = '-pc_type -pc_hypre_type'
   petsc_options_value = 'hypre boomeramg'
